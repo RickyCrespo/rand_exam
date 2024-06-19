@@ -1,0 +1,101 @@
+\documentclass[addpoints]{exam}
+
+\usepackage{pgfplots}
+\usepackage[first=1, last=6]{lcg}
+
+
+%Definitions
+
+\def\sp{2in}
+\def\ex{Primer Examen}
+\def\se{Sec. 086}
+\def\cl{Mate 4015}
+
+
+\newcounter{temp}
+
+%Stored Random Value
+\newcommand{\strv}
+
+\newcommand{\gv}[1]
+{
+    \setcounter{temp}{0}
+
+    \rand
+    \setcounter{temp}{\value{rand}}
+    \renewcommand{#1}{\arabic{temp}}
+}
+
+%Random Value
+\newcommand{\rv}
+{
+    \rand\arabic{rand}
+}
+
+\pagestyle{headandfoot}
+\runningheadrule
+\firstpageheader{\cl}{\ex}{\se}
+\runningheader{\cl}
+{\ex, Pág. \thepage\ de \numpages}
+{\se}
+\firstpagefooter{}{}{}
+\runningfooter{}{}{}
+
+\begin{document}
+
+\makebox[\textwidth]{Name: \hrulefill \quad Date: \rule{3.5cm}{0.15mm} \quad Grade: \rule{1cm}{0.15mm} $\backslash \numpoints$ }
+\vspace{0.1in}
+
+%Define Stored Random Value
+\gv{\strv}
+
+\begin{questions}
+
+    \question[5]
+    Solve $x^{2}+ \rv x+ \rv$.
+    \vspace{\sp}
+
+    \question[5]
+    Write the equation for the following graph.
+
+    \begin{tikzpicture}
+    \begin{axis}[grid style={line width=.5pt, draw=gray!10}, major grid style={line width = .2pt, draw=gray!50},
+        xmin=-5-\strv,xmax=5-\strv,
+        ymin=0,ymax=10,
+        xtick={},ytick={},
+        ymajorgrids=true,
+        xmajorgrids=true
+    ]
+
+        \addplot[
+            color=black,
+            domain=-10:10, 
+            samples=100
+        ]
+        {(x+\strv)^2};
+        
+    \end{axis}
+    \end{tikzpicture}
+    \vspace{\sp}
+
+    \question[10]
+    Solve $\int_{0}^{\infty} \frac{1}{x-\rv} \, dx$.
+    \vspace{\sp}
+
+    \question
+    Given $\rv x^{2} \sqrt{x^{3}} + \rv$:
+
+    \begin{parts}
+
+        \part[10]
+        Integrate the given equation.
+
+        \part[10]
+        Differentiate the given equation.
+    
+    \end{parts}
+    \vspace{\sp}
+
+\end{questions}
+
+\end{document}
